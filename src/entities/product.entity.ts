@@ -1,22 +1,29 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { v4 as uuid } from "uuid";
 
-@Entity('products')
-export class Product{
+@Entity("products")
+export class Product {
     @PrimaryColumn()
-    id: string
+    id: string;
 
     @Column()
-    name: string
+    name: string;
 
     @Column()
-    description: string
-    
+    description: string;
+
     @Column()
-    weight: number
+    weight: number;
 
     @CreateDateColumn({
-        name:'created_at',
-        type: 'timestamp'
+        name: "created_at",
+        type: "timestamp",
     })
-    createdAt: Date
+    createdAt: Date;
+
+    constructor() {
+        if (!this.id) {
+            this.id = uuid()
+        }
+    }
 }
